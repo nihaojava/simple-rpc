@@ -16,7 +16,10 @@ public class ComsumerApp {
 
     public static void main(String[] args) {
         Calculator calculator = new CalculatorRemoteImpl();
-        int result = calculator.add(1, 2);
-        log.info("result is {}", result);
+
+      //  for(int i=0;i<100;i++){
+            int result = calculator.add(1, 2);
+            log.info("result is {}", result);
+       // }
     }
 }

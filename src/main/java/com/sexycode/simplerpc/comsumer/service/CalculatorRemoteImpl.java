@@ -5,6 +5,7 @@ import com.sexycode.simplerpc.reuqest.CalculateRpcRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileOutputStream;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -31,8 +32,15 @@ public class CalculatorRemoteImpl implements Calculator {
             CalculateRpcRequest calculateRpcRequest = generateRequest(a, b);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
+            //test 序列化到文件测试
+            FileOutputStream fos = new FileOutputStream("d:\\temp2.out");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(calculateRpcRequest);
+            oos.writeObject(calculateRpcRequest);
+
             // 将请求发给服务提供方
             objectOutputStream.writeObject(calculateRpcRequest);
+            objectOutputStream.writeObject(calculateRpcRequest);//模拟粘包，一次发送了两个包，照样可以正常解析不会出错
 
             // 将响应体反序列化
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());

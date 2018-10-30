@@ -35,6 +35,8 @@ public class ProviderApp {
                     // 将请求反序列化
                     ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                     Object object = objectInputStream.readObject();
+                    Object object2 = objectInputStream.readObject();
+                    log.info("obj2 is {} ",((CalculateRpcRequest) object2).getA());
 
                     log.info("request is {}", object);
 
